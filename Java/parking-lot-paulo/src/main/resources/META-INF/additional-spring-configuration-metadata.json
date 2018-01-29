@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "car.hourlyRate",
+    "type": "java.lang.String",
+    "description": "Rate to charge cars per hour of parking"
+  },
+  {
+    "name": "car.dailyRate",
+    "type": "java.lang.String",
+    "description": "Rate to charge cars per day of parking"
+  },
+  {
+    "name": "motorbike.hourlyRate",
+    "type": "java.lang.String",
+    "description": "Rate to charge motorbikes per hour of parking"
+  },
+  {
+    "name": "motorbike.dailyRate",
+    "type": "java.lang.String",
+    "description": "Rate to charge motorbikes per day of parking"
+  }
+]}
