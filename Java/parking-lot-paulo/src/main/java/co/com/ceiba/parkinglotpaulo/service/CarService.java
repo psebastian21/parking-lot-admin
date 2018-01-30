@@ -9,45 +9,52 @@ import org.springframework.stereotype.Service;
 
 import co.com.ceiba.parkinglotpaulo.domain.Car;
 import co.com.ceiba.parkinglotpaulo.repository.CarRepository;
+import co.com.ceiba.parkinglotpaulo.utils.ITimeSource;
+import co.com.ceiba.parkinglotpaulo.utils.ParkingException;
 
 @Service
 public class CarService implements ICarService {
 	
 	//Constants
-	@Value("${carService.message.maximumCarCountReached")
+	@Value("${carService.message.maximumCarCountReached}")
 	private String maximumCarCountReachedMessage;
 	@Value("${carService.carCapacity}")
 	private int carCapacity;
-	@Value("${car.hourlyRate}")
+	@Value("${carService.hourlyRate}")
 	private double hourlyRate;
-	@Value("${car.dailyRate}")
+	@Value("${carService.dailyRate}")
 	private double dailyRate;
-	@Value("${carService.message.carIsAlreadyParked")
+	@Value("${carService.message.carIsAlreadyParked}")
 	private String carIsAlreadyParked;
-	@Value("${carService.message.carCanParkOnlyInSundaysOrMondays")
+	@Value("${carService.message.carCanParkOnlyInSundaysOrMondays}")
 	private String carCanParkOnlyInSundaysOrMondays;
+	@Value("${carService.message.carIsNotParked}")
+	private String carIsNotParked;
+	
 	@Autowired
 	private CarRepository carRepository;
+	@Autowired
+	private ITimeSource timeSource;
 	
 
 	@Override
-	public Car takeCarIn(String plate) throws Exception {
+	public Car takeCarIn(String plate) throws ParkingException {
 		boolean plateCanParkToday = checkIfPlateCanParkToday(plate);
 		if(!plateCanParkToday) {
-			throw new Exception(carCanParkOnlyInSundaysOrMondays);
+			throw new ParkingException(carCanParkOnlyInSundaysOrMondays);
 		}
 		Integer parkedCarsCount = carRepository.countParkedCars();
 		if (parkedCarsCount >= carCapacity) {
-			throw new Exception(maximumCarCountReachedMessage);
+			throw new ParkingException(maximumCarCountReachedMessage);
 		}
 		Car carCheck = carRepository.checkIfCarIsAlreadyParked(plate);
 		if(carCheck != null) {
-			throw new Exception(carIsAlreadyParked);
+			throw new ParkingException(carIsAlreadyParked);
 		}
 		Car car = new Car();
 		car.setPlate(plate);
-		car.setEntranceTime(new Date());
-		return carRepository.save(car);
+		car.setEntranceTime(new Date(timeSource.currentTimeMillis()));
+		return carRepository.saveAndFlush(car);
 	}
 
 	private boolean checkIfPlateCanParkToday(String plate) {
@@ -55,7 +62,7 @@ public class CarService implements ICarService {
 			return true;
 		}
 		Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
+        calendar.setTime(new Date(timeSource.currentTimeMillis()));
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         if (dayOfWeek != 1 && dayOfWeek != 2) {
         	return false;
@@ -64,9 +71,30 @@ public class CarService implements ICarService {
 	}
 
 	@Override
-	public Car getCarOut(String plate) {
-		// TODO Auto-generated method stub
-		return null;
+	public Car getCarOut(String plate) throws ParkingException {
+		Car c = carRepository.checkIfCarIsAlreadyParked(plate);
+		if (c == null) {
+			throw new ParkingException(carIsNotParked);
+		}
+		c.setExitTime(new Date(timeSource.currentTimeMillis()));
+		c.calculateFee(dailyRate, hourlyRate);
+		return carRepository.saveAndFlush(c);
+	}
+
+	public CarRepository getCarRepository() {
+		return carRepository;
+	}
+
+	public void setCarRepository(CarRepository carRepository) {
+		this.carRepository = carRepository;
+	}
+
+	public ITimeSource getTimeSource() {
+		return timeSource;
+	}
+
+	public void setTimeSource(ITimeSource timeSource) {
+		this.timeSource = timeSource;
 	}
 
 }

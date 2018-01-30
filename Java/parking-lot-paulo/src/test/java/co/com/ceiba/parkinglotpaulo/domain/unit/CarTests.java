@@ -7,26 +7,20 @@ import java.util.Date;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import co.com.ceiba.parkinglotpaulo.ParkingLotPauloApplication;
 import co.com.ceiba.parkinglotpaulo.databuilder.CarDataBuilder;
 import co.com.ceiba.parkinglotpaulo.domain.Car;
 
 //@SpringBootTest(classes=ParkingLotPauloApplication.class)
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes=ParkingLotPauloApplication.class)
-@TestPropertySource(locations="classpath:carTests.properties")
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+//@TestPropertySource(locations="classpath:carTests.properties")
 public class CarTests {
 	
-	@Value("${car.hourlyRate}")
-	private double hourlyRate;
-	@Value("${car.dailyRate}")
-	private double dailyRate;
+	@Value("${carService.hourlyRate}")
+	private static final double hourlyRate = 1000;
+	@Value("${carService.dailyRate}")
+	private static final double dailyRate = 8000;
 	
 	private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm";
 	SimpleDateFormat dateFormat;
