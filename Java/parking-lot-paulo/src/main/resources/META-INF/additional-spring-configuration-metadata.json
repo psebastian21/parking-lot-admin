@@ -1,22 +1,42 @@
 {"properties": [
   {
     "name": "car.hourlyRate",
-    "type": "java.lang.String",
+    "type": "java.lang.Double",
     "description": "Rate to charge cars per hour of parking"
   },
   {
     "name": "car.dailyRate",
-    "type": "java.lang.String",
+    "type": "java.lang.Double",
     "description": "Rate to charge cars per day of parking"
   },
   {
     "name": "motorbike.hourlyRate",
-    "type": "java.lang.String",
+    "type": "java.lang.Double",
     "description": "Rate to charge motorbikes per hour of parking"
   },
   {
     "name": "motorbike.dailyRate",
-    "type": "java.lang.String",
+    "type": "java.lang.Double",
     "description": "Rate to charge motorbikes per day of parking"
+  },
+  {
+    "name": "carService.message.maximumCarCountReached",
+    "type": "java.lang.String",
+    "description": "Message when mo more cars can be allowed in"
+  },
+  {
+    "name": "carService.carCapacity",
+    "type": "java.lang.Integer",
+    "description": "A description for 'carService.carCapacity'"
+  },
+  {
+    "name": "carService.message.carIsAlreadyParked",
+    "type": "java.lang.String",
+    "description": "A description for 'carService.message.carIsAlreadyParked'"
+  },
+  {
+    "name": "carService.message.carCanParkOnlyInSundaysOrMondays",
+    "type": "java.lang.String",
+    "description": "A description for 'carService.message.carCanParkOnlyInSundaysOrMondays'"
   }
 ]}

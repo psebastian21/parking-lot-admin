@@ -1,8 +1,8 @@
 package co.com.ceiba.parkinglotpaulo.domain;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
 
-@Component
+@Entity
 public final class Car extends Vehicle {
 	
 	public void calculateFee(double dailyRate, double hourlyRate) {
