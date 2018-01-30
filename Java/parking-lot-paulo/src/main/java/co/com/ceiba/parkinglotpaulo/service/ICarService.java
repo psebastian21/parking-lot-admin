@@ -4,8 +4,8 @@ import co.com.ceiba.parkinglotpaulo.domain.Car;
 
 public interface ICarService {
 
-	public Car takeCarIn(Car car);
+	public Car takeCarIn(String plate);
 	
-	public Car getCarOut(Car car);
+	public Car getCarOut(String plate);
 	
 }

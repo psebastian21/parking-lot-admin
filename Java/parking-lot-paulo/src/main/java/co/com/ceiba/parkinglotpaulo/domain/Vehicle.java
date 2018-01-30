@@ -25,6 +25,24 @@ public abstract class Vehicle{
 	private Date exitTime;
 	@Column
 	private String plate;
+	@Column
+	private Double fee;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Double getFee() {
+		return fee;
+	}
+
+	public void setFee(Double fee) {
+		this.fee = fee;
+	}
 
 	public Date getEntranceTime() {
 		return entranceTime;
@@ -58,5 +76,7 @@ public abstract class Vehicle{
 		}
 		return (int) diffHours;
 	}
+	
+	public abstract void calculateFee(double dailyRate, double hourlyRate);
 	
 }
