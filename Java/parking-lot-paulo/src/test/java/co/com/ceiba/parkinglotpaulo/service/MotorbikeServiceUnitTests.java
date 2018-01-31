@@ -16,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.com.ceiba.parkinglotpaulo.databuilder.MotorbikeDataBuilder;
 import co.com.ceiba.parkinglotpaulo.domain.Motorbike;
@@ -40,7 +41,8 @@ public class MotorbikeServiceUnitTests {
 	private static String fakeDate = "2018/01/01";
 		
 	@TestConfiguration
-    static class MotorbikeServiceUnitTestsContextConfiguration {
+	@Transactional
+    protected static class MotorbikeServiceUnitTestsContextConfiguration {
   
         @Bean()
         public IMotorbikeService motorbikeService(ITimeSource timeSource) {

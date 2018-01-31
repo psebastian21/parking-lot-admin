@@ -41,7 +41,7 @@ public class CarServiceUnitTests {
 	private static String fakeDate = "2018/01/01";
 	
 	@TestConfiguration
-    static class CarServiceUnitTestsContextConfiguration {
+    protected static class CarServiceUnitTestsContextConfiguration {
   
         @Bean()
         public ICarService carService(ITimeSource timeSource) {
