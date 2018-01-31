@@ -1,4 +1,4 @@
-package co.com.ceiba.parkinglotpaulo.domain.unit;
+package co.com.ceiba.parkinglotpaulo.domain;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,19 +7,16 @@ import java.util.Date;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Value;
 import co.com.ceiba.parkinglotpaulo.databuilder.CarDataBuilder;
 import co.com.ceiba.parkinglotpaulo.domain.Car;
 
 //@SpringBootTest(classes=ParkingLotPauloApplication.class)
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
-//@TestPropertySource(locations="classpath:carTests.properties")
-public class CarTests {
+//@TestPropertySource(locations="classpath:carUnitTests.properties")
+public class CarUnitTests {
 	
-	@Value("${carService.hourlyRate}")
 	private static final double hourlyRate = 1000;
-	@Value("${carService.dailyRate}")
 	private static final double dailyRate = 8000;
 	
 	private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm";
