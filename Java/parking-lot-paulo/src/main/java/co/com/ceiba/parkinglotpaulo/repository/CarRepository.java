@@ -9,11 +9,8 @@ import co.com.ceiba.parkinglotpaulo.domain.Car;
 
 @Repository
 public interface CarRepository extends JpaRepository<Car, Long> {
-	
 	@Query("SELECT COUNT(c) FROM Car c WHERE exitTime IS NULL")
 	public Integer countParkedCars();
-	
 	@Query("SELECT c FROM Car c WHERE plate = :plate AND exitTime IS NULL")
 	public Car checkIfCarIsAlreadyParked(@Param("plate") String plate);
-
 }

@@ -1,5 +1,6 @@
 package co.com.ceiba.parkinglotpaulo.service;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,7 +39,7 @@ public class CarService implements ICarService {
 	
 
 	@Override
-	public Car takeCarIn(String plate) throws ParkingException {
+	public Car takeCarIn(String plate) throws ParkingException, ParseException {
 		boolean plateCanParkToday = checkIfPlateCanParkToday(plate);
 		if(!plateCanParkToday) {
 			throw new ParkingException(carCanParkOnlyInSundaysOrMondays);
@@ -57,7 +58,7 @@ public class CarService implements ICarService {
 		return carRepository.saveAndFlush(car);
 	}
 
-	private boolean checkIfPlateCanParkToday(String plate) {
+	private boolean checkIfPlateCanParkToday(String plate) throws ParseException {
 		if (plate.toUpperCase().charAt(0) != 'A') {
 			return true;
 		}
@@ -71,7 +72,7 @@ public class CarService implements ICarService {
 	}
 
 	@Override
-	public Car getCarOut(String plate) throws ParkingException {
+	public Car getCarOut(String plate) throws ParkingException, ParseException {
 		Car c = carRepository.checkIfCarIsAlreadyParked(plate);
 		if (c == null) {
 			throw new ParkingException(carIsNotParked);

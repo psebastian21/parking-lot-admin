@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 public abstract class Vehicle{
@@ -19,11 +20,13 @@ public abstract class Vehicle{
 	protected Long id;
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull
 	private Date entranceTime;
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date exitTime;
 	@Column
+	@NotNull
 	private String plate;
 	@Column
 	private Double fee;
@@ -68,7 +71,7 @@ public abstract class Vehicle{
 		this.plate = plate;
 	}
 	
-	protected int getElapsedHours() {
+	private int getElapsedHours() {
 		long diffMillis = exitTime.getTime() - entranceTime.getTime();
 		long diffHours = diffMillis / 3600000L;
 		if (diffMillis % 3600000L >= 60000L) {
@@ -77,6 +80,15 @@ public abstract class Vehicle{
 		return (int) diffHours;
 	}
 	
-	public abstract void calculateFee(double dailyRate, double hourlyRate);
+	protected void calculateFee(double dailyRate, double hourlyRate) {
+		int elapsedHours = this.getElapsedHours();
+		int elapsedDays = elapsedHours / 24;
+		elapsedHours -= (elapsedDays * 24);
+		if (elapsedHours >= 9) {
+			elapsedDays++;
+			elapsedHours = 0;
+		}
+		setFee(dailyRate * elapsedDays + hourlyRate * elapsedHours);
+	}
 	
 }
