@@ -52,6 +52,7 @@ public class CarRepositoryIntTests {
 		carRepository.saveAndFlush(parkedCar);
 		//Act
 		Car foundCar = carRepository.checkIfCarIsAlreadyParked(parkedCar.getPlate());
+		//Assert
 		Assert.assertEquals(parkedCar.getPlate(),foundCar.getPlate());
 	}
 	
@@ -62,6 +63,7 @@ public class CarRepositoryIntTests {
 		carRepository.saveAndFlush(parkedCar);
 		//Act
 		Car carSearch = carRepository.checkIfCarIsAlreadyParked(NON_PARKED_PLATE);
+		//Assert
 		Assert.assertNull(carSearch);
 	}
 
