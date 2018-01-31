@@ -44,9 +44,9 @@ public class CarServiceUnitTests {
     static class CarServiceUnitTestsContextConfiguration {
   
         @Bean()
-        public ICarService carService(ITimeSource sundayTimeSource) {
+        public ICarService carService(ITimeSource timeSource) {
         	CarService carService = new CarService();
-        	carService.setTimeSource(sundayTimeSource);
+        	carService.setTimeSource(timeSource);
             return carService;
         }
         
@@ -75,7 +75,7 @@ public class CarServiceUnitTests {
     private CarRepository carRepositoryMock;
     
     @Before
-    public void initClass() {
+    public void init() {
     	carService.setCarRepository(carRepositoryMock);
     }
     
