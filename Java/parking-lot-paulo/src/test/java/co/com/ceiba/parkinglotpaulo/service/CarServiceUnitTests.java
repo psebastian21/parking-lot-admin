@@ -1,9 +1,6 @@
 package co.com.ceiba.parkinglotpaulo.service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,20 +8,22 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import co.com.ceiba.parkinglotpaulo.ParkingLotPauloApplication;
 import co.com.ceiba.parkinglotpaulo.databuilder.CarDataBuilder;
 import co.com.ceiba.parkinglotpaulo.domain.Car;
 import co.com.ceiba.parkinglotpaulo.repository.CarRepository;
 import co.com.ceiba.parkinglotpaulo.utils.ITimeSource;
+import co.com.ceiba.parkinglotpaulo.utils.InjectableTimeSource;
 import co.com.ceiba.parkinglotpaulo.utils.ParkingException;
 
 @RunWith(SpringRunner.class)
 @TestPropertySource(locations="classpath:carServiceUnitTests.properties")
+@SpringBootTest(classes=ParkingLotPauloApplication.class)
 public class CarServiceUnitTests {
 	
 	//Constants
@@ -38,33 +37,24 @@ public class CarServiceUnitTests {
 	private String carCanParkOnlyInSundaysOrMondays;
 	@Value("${carService.message.carIsNotParked}")
 	private String carIsNotParked;
-	private static String fakeDate = "2018/01/01";
+	private ITimeSource injectableTimeSource = new InjectableTimeSource();
 	
-	@TestConfiguration
-    protected static class CarServiceUnitTestsContextConfiguration {
-  
-        @Bean()
-        public ICarService carService(ITimeSource timeSource) {
-        	CarService carService = new CarService();
-        	carService.setTimeSource(timeSource);
-            return carService;
-        }
-        
-        @Bean()
-        public ITimeSource timeSource() {
-        	return new ITimeSource() {
-
-				@Override
-				public long currentTimeMillis() throws ParseException {
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-					Date sundayDate = dateFormat.parse(fakeDate);
-					return sundayDate.getTime();
-				}
-        		
-        	};
-        }
-        
-    }
+//	@TestConfiguration
+//    protected static class CarServiceUnitTestsContextConfiguration {
+//  
+//        @Bean()
+//        public ICarService carService(ITimeSource timeSource) {
+//        	CarService carService = new CarService();
+//        	carService.setTimeSource(timeSource);
+//            return carService;
+//        }
+//        
+//        @Bean()
+//        public ITimeSource timeSource() {
+//        	return new InjectableTimeSource();
+//        }
+//        
+//    }
 	
 	private static final String A_PLATE = 	"aaa 123";
 	private static final String NO_RESTRICTION_PLATE = 	"zaa 123";
@@ -82,7 +72,8 @@ public class CarServiceUnitTests {
     @Test
     public void plateBeginningInACantParkOutsideOfSundaysAndMondays() throws ParseException {
     	//Arrange
-    	fakeDate = "2018/01/31";
+    	carService.setTimeSource(injectableTimeSource);
+    	((InjectableTimeSource)carService.getTimeSource()).setInjectedTime("2018/01/31");
     	try {
     		//Act
     		carService.takeCarIn(A_PLATE);

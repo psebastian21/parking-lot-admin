@@ -1,9 +1,6 @@
 package co.com.ceiba.parkinglotpaulo.service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,21 +8,21 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
-
+import co.com.ceiba.parkinglotpaulo.ParkingLotPauloApplication;
 import co.com.ceiba.parkinglotpaulo.databuilder.MotorbikeDataBuilder;
 import co.com.ceiba.parkinglotpaulo.domain.Motorbike;
 import co.com.ceiba.parkinglotpaulo.repository.MotorbikeRepository;
 import co.com.ceiba.parkinglotpaulo.utils.ITimeSource;
+import co.com.ceiba.parkinglotpaulo.utils.InjectableTimeSource;
 import co.com.ceiba.parkinglotpaulo.utils.ParkingException;
 
 @RunWith(SpringRunner.class)
 @TestPropertySource(locations="classpath:motorbikeServiceUnitTests.properties")
+@SpringBootTest(classes=ParkingLotPauloApplication.class)
 public class MotorbikeServiceUnitTests {
 	//Constants
 	@Value("${motorbikeService.maximumMotorbikeCountReached}")
@@ -38,34 +35,23 @@ public class MotorbikeServiceUnitTests {
 	private String motorbikeCanParkOnlyInSundaysOrMondays;
 	@Value("${motorbikeService.motorbikeIsNotParked}")
 	private String motorbikeIsNotParked;
-	private static String fakeDate = "2018/01/01";
 		
-	@TestConfiguration
-	@Transactional
-    protected static class MotorbikeServiceUnitTestsContextConfiguration {
-  
-        @Bean()
-        public IMotorbikeService motorbikeService(ITimeSource timeSource) {
-        	MotorbikeService motorbikeService = new MotorbikeService();
-        	motorbikeService.setTimeSource(timeSource);
-            return motorbikeService;
-        }
-        
-        @Bean()
-        public ITimeSource timeSource() {
-        	return new ITimeSource() {
-
-				@Override
-				public long currentTimeMillis() throws ParseException {
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-					Date sundayDate = dateFormat.parse(fakeDate);
-					return sundayDate.getTime();
-				}
-        		
-        	};
-        }
-        
-    }
+//	@TestConfiguration
+//    protected static class MotorbikeServiceUnitTestsContextConfiguration {
+//  
+//        @Bean()
+//        public IMotorbikeService motorbikeService(ITimeSource timeSource) {
+//        	MotorbikeService motorbikeService = new MotorbikeService();
+//        	motorbikeService.setTimeSource(timeSource);
+//            return motorbikeService;
+//        }
+//        
+//        @Bean()
+//        public ITimeSource timeSource() {
+//        	return new InjectableTimeSource();
+//        }
+//        
+//    }
 	
 	private static final String A_PLATE = 	"aaa 123";
 	private static final String NO_RESTRICTION_PLATE = 	"zaa 123";
@@ -74,6 +60,7 @@ public class MotorbikeServiceUnitTests {
     private IMotorbikeService motorbikeService;
     @MockBean
     private MotorbikeRepository motorbikeRepositoryMock;
+    private ITimeSource injectableTimeSource = new InjectableTimeSource();
     
     @Before
     public void init() {
@@ -83,7 +70,8 @@ public class MotorbikeServiceUnitTests {
     @Test
     public void plateBeginningInACantParkOutsideOfSundaysAndMondays() throws ParseException {
     	//Arrange
-    	fakeDate = "2018/01/31";
+    	motorbikeService.setTimeSource(injectableTimeSource);
+    	((InjectableTimeSource)motorbikeService.getTimeSource()).setInjectedTime("2018/01/31");
     	Motorbike motorbike = new MotorbikeDataBuilder().withPlate(A_PLATE).build();
     	try {
     		//Act

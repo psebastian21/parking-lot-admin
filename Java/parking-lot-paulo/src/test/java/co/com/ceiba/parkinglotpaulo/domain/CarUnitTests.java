@@ -12,7 +12,6 @@ import co.com.ceiba.parkinglotpaulo.domain.Car;
 
 //@SpringBootTest(classes=ParkingLotPauloApplication.class)
 //@RunWith(SpringRunner.class)
-//@SpringBootTest
 //@TestPropertySource(locations="classpath:carUnitTests.properties")
 public class CarUnitTests {
 	

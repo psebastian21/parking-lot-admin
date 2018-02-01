@@ -86,11 +86,11 @@ public class MotorbikeService implements IMotorbikeService{
 	public void setMotorbikeRepository(MotorbikeRepository motorbikeRepository) {
 		this.motorbikeRepository = motorbikeRepository;
 	}
-
+	@Override
 	public ITimeSource getTimeSource() {
 		return timeSource;
 	}
-
+	@Override
 	public void setTimeSource(ITimeSource timeSource) {
 		this.timeSource = timeSource;
 	}
