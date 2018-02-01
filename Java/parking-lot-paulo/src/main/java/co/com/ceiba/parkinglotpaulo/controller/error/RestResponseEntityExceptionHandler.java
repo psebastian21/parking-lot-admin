@@ -19,7 +19,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 	@ExceptionHandler({ Exception.class })
-    public ResponseEntity<Object> handleInternalServerError(final ParkingException ex, final WebRequest request) {
+    public ResponseEntity<Object> handleInternalServerError(final Exception ex, final WebRequest request) {
         final String bodyOfResponse = ex.getMessage();
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }

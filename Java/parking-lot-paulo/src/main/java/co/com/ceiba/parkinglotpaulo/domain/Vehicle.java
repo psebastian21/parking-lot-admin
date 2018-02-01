@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 public abstract class Vehicle{
@@ -18,15 +17,13 @@ public abstract class Vehicle{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(updatable = false, nullable = false, name = "id")
 	protected Long id;
-	@Column
+	@Column(nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@NotNull
 	private Date entranceTime;
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date exitTime;
-	@Column
-	@NotNull
+	@Column(nullable=false)
 	private String plate;
 	@Column
 	private Double fee;

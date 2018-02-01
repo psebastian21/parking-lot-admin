@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="co.com.ceiba.parkinglotpaulo.domain.CarUnitTests" tests="10" skipped="0" failures="0" errors="0" timestamp="2018-02-01T14:29:10" hostname="PAULO-GARCIA" time="0.011">
+  <properties/>
+  <testcase name="theFeeForTuentyFourHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.CarUnitTests" time="0.006"/>
+  <testcase name="theFeeForThreeDaysIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.CarUnitTests" time="0.0"/>
+  <testcase name="theFeeForTuentyThreeHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.CarUnitTests" time="0.0"/>
+  <testcase name="theFeeForZeroHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.CarUnitTests" time="0.0"/>
+  <testcase name="theFeeForTuentyFiveHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.CarUnitTests" time="0.0"/>
+  <testcase name="theFeeForNineHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.CarUnitTests" time="0.001"/>
+  <testcase name="theFeeForThirtyOneDaysIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.CarUnitTests" time="0.0"/>
+  <testcase name="theFeeForThirtyTwoHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.CarUnitTests" time="0.0"/>
+  <testcase name="theFeeForEightHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.CarUnitTests" time="0.0"/>
+  <testcase name="theFeeForThirtyThreeHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.CarUnitTests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

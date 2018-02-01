@@ -2,12 +2,10 @@ package co.com.ceiba.parkinglotpaulo.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public final class Motorbike extends Vehicle {
-	@Column
-	@NotNull
+	@Column(nullable=false)
 	private int cylinderCapacity;
 
 	@Override

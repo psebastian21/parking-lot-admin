@@ -14,7 +14,7 @@ import co.com.ceiba.parkinglotpaulo.service.ICarService;
 import co.com.ceiba.parkinglotpaulo.utils.ParkingException;
 
 @RestController
-@RequestMapping("/api/car")
+@RequestMapping("/parking/car")
 public class CarController {
 	@Autowired
 	private ICarService carService;
