@@ -77,7 +77,7 @@ public abstract class Vehicle{
 		return (int) diffHours;
 	}
 	
-	protected void calculateFee(double dailyRate, double hourlyRate) {
+	public void calculateFee(double dailyRate, double hourlyRate) {
 		int elapsedHours = this.getElapsedHours();
 		int elapsedDays = elapsedHours / 24;
 		elapsedHours -= (elapsedDays * 24);
