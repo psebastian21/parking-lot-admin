@@ -65,10 +65,7 @@ public class CarService implements ICarService {
 		Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date(timeSource.currentTimeMillis()));
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        if (dayOfWeek != 1 && dayOfWeek != 2) {
-        	return false;
-        }
-        return true;
+        return dayOfWeek == 1 || dayOfWeek == 2;
 	}
 
 	@Override
