@@ -1,10 +1,15 @@
 package co.com.ceiba.parkinglotpaulo.service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +23,6 @@ import co.com.ceiba.parkinglotpaulo.databuilder.CarDataBuilder;
 import co.com.ceiba.parkinglotpaulo.domain.Car;
 import co.com.ceiba.parkinglotpaulo.repository.CarRepository;
 import co.com.ceiba.parkinglotpaulo.utils.ITimeSource;
-import co.com.ceiba.parkinglotpaulo.utils.InjectableTimeSource;
 import co.com.ceiba.parkinglotpaulo.utils.ParkingException;
 
 @RunWith(SpringRunner.class)
@@ -37,32 +41,18 @@ public class CarServiceUnitTests {
 	private String carCanParkOnlyInSundaysOrMondays;
 	@Value("${carService.message.carIsNotParked}")
 	private String carIsNotParked;
-	private ITimeSource injectableTimeSource = new InjectableTimeSource();
-	
-//	@TestConfiguration
-//    protected static class CarServiceUnitTestsContextConfiguration {
-//  
-//        @Bean()
-//        public ICarService carService(ITimeSource timeSource) {
-//        	CarService carService = new CarService();
-//        	carService.setTimeSource(timeSource);
-//            return carService;
-//        }
-//        
-//        @Bean()
-//        public ITimeSource timeSource() {
-//        	return new InjectableTimeSource();
-//        }
-//        
-//    }
+	@Mock
+    private ITimeSource injectableTimeSource;
 	
 	private static final String A_PLATE = 	"aaa 123";
 	private static final String NO_RESTRICTION_PLATE = 	"zaa 123";
 	
+	@InjectMocks
 	@Autowired
     private ICarService carService;
     @MockBean
     private CarRepository carRepositoryMock;
+    
     
     @Before
     public void init() {
@@ -72,8 +62,9 @@ public class CarServiceUnitTests {
     @Test
     public void plateBeginningInACantParkOutsideOfSundaysAndMondays() throws ParseException {
     	//Arrange
-    	carService.setTimeSource(injectableTimeSource);
-    	((InjectableTimeSource)carService.getTimeSource()).setInjectedTime("2018/01/31");
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date wednesdayDate = dateFormat.parse("2018/01/31");
+    	Mockito.when(injectableTimeSource.currentTimeMillis()).thenReturn(wednesdayDate.getTime());
     	try {
     		//Act
     		carService.takeCarIn(A_PLATE);
