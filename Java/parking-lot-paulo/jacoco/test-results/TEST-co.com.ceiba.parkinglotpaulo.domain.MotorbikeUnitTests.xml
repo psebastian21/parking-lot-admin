@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" tests="20" skipped="0" failures="0" errors="0" timestamp="2018-02-01T14:29:10" hostname="PAULO-GARCIA" time="0.012">
+<testsuite name="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" tests="20" skipped="0" failures="0" errors="0" timestamp="2018-02-02T16:31:41" hostname="PAULO-GARCIA" time="0.017">
   <properties/>
-  <testcase name="theFeeForTuentyFourHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.002"/>
-  <testcase name="theFeeForTuentyFiveHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
-  <testcase name="theFeeForTuentyThreeHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
-  <testcase name="theFeeForZeroHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
+  <testcase name="theFeeForTuentyFourHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.004"/>
+  <testcase name="theFeeForTuentyFiveHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
+  <testcase name="theFeeForTuentyThreeHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
+  <testcase name="theFeeForZeroHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
   <testcase name="theFeeForThirtyTwoHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
-  <testcase name="theFeeForThreeDaysIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
+  <testcase name="theFeeForThreeDaysIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.002"/>
   <testcase name="theFeeForEightHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
   <testcase name="theFeeForThirtyThreeHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
   <testcase name="theFeeForTuentyThreeHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
   <testcase name="theFeeForZeroHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
-  <testcase name="theFeeForTuentyFiveHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
+  <testcase name="theFeeForTuentyFiveHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
   <testcase name="theFeeForNineHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
   <testcase name="theFeeForThirtyOneDaysIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
-  <testcase name="theFeeForNineHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
-  <testcase name="theFeeForThirtyTwoHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
+  <testcase name="theFeeForNineHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
+  <testcase name="theFeeForThirtyTwoHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
   <testcase name="theFeeForTuentyFourHoursAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
-  <testcase name="theFeeForThirtyOneDaysAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
+  <testcase name="theFeeForThirtyOneDaysAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
   <testcase name="theFeeForThreeDaysAndBigCylinderIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
-  <testcase name="theFeeForEightHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
-  <testcase name="theFeeForThirtyThreeHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
+  <testcase name="theFeeForEightHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.001"/>
+  <testcase name="theFeeForThirtyThreeHoursIsCorrect" classname="co.com.ceiba.parkinglotpaulo.domain.MotorbikeUnitTests" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
