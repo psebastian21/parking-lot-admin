@@ -1,5 +1,7 @@
 package co.com.ceiba.parkinglotpaulo.repository;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,6 +67,20 @@ public class CarRepositoryIntTests {
 		Car carSearch = carRepository.checkIfCarIsAlreadyParked(NON_PARKED_PLATE);
 		//Assert
 		Assert.assertNull(carSearch);
+	}
+	@Test
+	public void listOfParkedCarsIsCorrect() {
+		//Arrange
+		Car parkedCar1 = new CarDataBuilder().withExitTime(null).build();
+		Car parkedCar2 = new CarDataBuilder().withExitTime(null).build();
+		Car nonParkedCar1 = new CarDataBuilder().build();
+		carRepository.saveAndFlush(parkedCar1);
+		carRepository.saveAndFlush(parkedCar2);
+		carRepository.saveAndFlush(nonParkedCar1);
+		//Act
+		List<Car> parkedCars = carRepository.findAllParkedCars();
+		//Assert
+		Assert.assertEquals(2, parkedCars.size());
 	}
 
 }

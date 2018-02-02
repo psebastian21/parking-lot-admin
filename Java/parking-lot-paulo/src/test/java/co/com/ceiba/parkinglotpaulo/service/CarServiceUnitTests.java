@@ -3,6 +3,8 @@ package co.com.ceiba.parkinglotpaulo.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -141,6 +143,19 @@ public class CarServiceUnitTests {
     	//Assert
     	Assert.assertNotNull(car);
     }
+    
+    @Test
+	public void listOfParkedCarsIsCorrect() {
+		//Arrange
+    	List<Car> parkedCars = new LinkedList<Car>();
+    	parkedCars.add(new CarDataBuilder().withExitTime(null).build());
+    	parkedCars.add(new CarDataBuilder().withExitTime(null).build());
+    	Mockito.when(carRepositoryMock.findAllParkedCars()).thenReturn(parkedCars);
+		//Act
+		List<Car> parkedCarsFromService = carService.findAllParkedCars();
+		//Assert
+		Assert.assertEquals(parkedCars, parkedCarsFromService);
+	}
     
 
 }

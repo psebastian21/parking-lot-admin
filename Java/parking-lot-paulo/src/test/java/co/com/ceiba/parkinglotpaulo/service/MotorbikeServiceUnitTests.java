@@ -3,6 +3,8 @@ package co.com.ceiba.parkinglotpaulo.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import co.com.ceiba.parkinglotpaulo.ParkingLotPauloApplication;
 import co.com.ceiba.parkinglotpaulo.databuilder.MotorbikeDataBuilder;
 import co.com.ceiba.parkinglotpaulo.domain.Motorbike;
@@ -147,4 +150,16 @@ public class MotorbikeServiceUnitTests {
     	//Assert
     	Assert.assertNotNull(motorbike);
     }
+    @Test
+	public void listOfParkedCarsIsCorrect() {
+		//Arrange
+    	List<Motorbike> parkedMotorbikes = new LinkedList<Motorbike>();
+    	parkedMotorbikes.add(new MotorbikeDataBuilder().withExitTime(null).build());
+    	parkedMotorbikes.add(new MotorbikeDataBuilder().withExitTime(null).build());
+    	Mockito.when(motorbikeRepositoryMock.findAllParkedMotorbikes()).thenReturn(parkedMotorbikes);
+		//Act
+		List<Motorbike> parkedMotorbikesFromService = motorbikeService.findAllParkedMotorbikes();
+		//Assert
+		Assert.assertEquals(parkedMotorbikes, parkedMotorbikesFromService);
+	}
 }

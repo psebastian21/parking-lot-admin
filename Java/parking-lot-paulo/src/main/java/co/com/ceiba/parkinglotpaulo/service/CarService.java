@@ -3,6 +3,7 @@ package co.com.ceiba.parkinglotpaulo.service;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -93,6 +94,11 @@ public class CarService implements ICarService {
 	@Override
 	public void setTimeSource(ITimeSource timeSource) {
 		this.timeSource = timeSource;
+	}
+
+	@Override
+	public List<Car> findAllParkedCars() {
+		return carRepository.findAllParkedCars();
 	}
 
 }

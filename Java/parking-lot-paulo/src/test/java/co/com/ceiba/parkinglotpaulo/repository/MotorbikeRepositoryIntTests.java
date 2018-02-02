@@ -1,5 +1,7 @@
 package co.com.ceiba.parkinglotpaulo.repository;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -64,5 +66,19 @@ public class MotorbikeRepositoryIntTests {
 		Motorbike motorbikeSearch = motorbikeRepository.checkIfMotorbikeIsAlreadyParked(NON_PARKED_PLATE);
 		//Assert
 		Assert.assertNull(motorbikeSearch);
+	}
+	@Test
+	public void listOfParkedMotorbikesIsCorrect() {
+		//Arrange
+		Motorbike parkedMotorbike1 = new MotorbikeDataBuilder().withExitTime(null).build();
+		Motorbike parkedMotorbike2 = new MotorbikeDataBuilder().withExitTime(null).build();
+		Motorbike nonParkedMotorbike1 = new MotorbikeDataBuilder().build();
+		motorbikeRepository.saveAndFlush(parkedMotorbike1);
+		motorbikeRepository.saveAndFlush(parkedMotorbike2);
+		motorbikeRepository.saveAndFlush(nonParkedMotorbike1);
+		//Act
+		List<Motorbike> parkedMotorbikes = motorbikeRepository.findAllParkedMotorbikes();
+		//Assert
+		Assert.assertEquals(2, parkedMotorbikes.size());
 	}
 }

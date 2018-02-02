@@ -1,5 +1,7 @@
 package co.com.ceiba.parkinglotpaulo.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,4 +15,6 @@ public interface CarRepository extends JpaRepository<Car, Long> {
 	public Integer countParkedCars();
 	@Query("SELECT c FROM Car c WHERE plate = :plate AND exitTime IS NULL")
 	public Car checkIfCarIsAlreadyParked(@Param("plate") String plate);
+	@Query("SELECT c FROM Car c WHERE exitTime IS NULL")
+	public List<Car> findAllParkedCars();
 }

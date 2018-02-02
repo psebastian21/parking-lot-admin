@@ -27,7 +27,7 @@ public class MotorbikeController {
 		motorbike = motorbikeService.takeMotorbikeIn(motorbike);
 		return ResponseEntity.ok().body(motorbike);
 	}
-	@GetMapping("out/{plate}")
+	@GetMapping("/out/{plate}")
 	public ResponseEntity<Motorbike> getMotorbikeOut(@PathVariable("plate") String plate) throws ParkingException, ParseException{
 		Motorbike motorbike = motorbikeService.getMotorbikeOut(plate);
 		return ResponseEntity.ok().body(motorbike);
